@@ -1,0 +1,34 @@
+# Opt-in profile used only by the loopback task bridge.
+# Install as $CODEX_HOME/bridge.config.toml after reviewing bridge.sh.
+approval_policy = "never"
+sandbox_mode = "read-only"
+mcp_optional_startup_grace_ms = 5000
+suppress_unstable_features_warning = true
+
+[features]
+code_mode = true
+code_mode_only = false
+code_mode_tool_search = true
+
+[mcp_servers.stepneo-phone]
+command = "/system/bin/sh"
+args = ["/data/local/tmp/stepneo-codex/phone-mcp.sh"]
+required = true
+startup_timeout_sec = 20
+tool_timeout_sec = 30
+enabled_tools = ["phone_status", "phone_capabilities", "phone_find", "phone_wait", "phone_ui", "phone_screenshot", "phone_tap", "phone_swipe", "phone_key", "phone_launch", "phone_open_url", "phone_input", "phone_click"]
+env_vars = ["PATH", "BOOTCLASSPATH", "DEX2OATBOOTCLASSPATH", "ANDROID_ROOT", "ANDROID_DATA", "ANDROID_ART_ROOT", "ANDROID_I18N_ROOT", "ANDROID_TZDATA_ROOT", "ANDROID_ASSETS", "ANDROID_BOOTLOGO", "ANDROID_STORAGE", "ASEC_MOUNTPOINT", "DOWNLOAD_CACHE", "EXTERNAL_STORAGE", "STANDALONE_SYSTEMSERVER_JARS", "SYSTEMSERVERCLASSPATH", "USER", "LOGNAME", "STEPNEO_PHONE_PROFILE", "STEPNEO_PHONE_POLICY"]
+default_tools_approval_mode = "approve"
+
+[mcp_servers.stepneo-phone.tools.phone_launch]
+approval_mode = "approve"
+[mcp_servers.stepneo-phone.tools.phone_tap]
+approval_mode = "approve"
+[mcp_servers.stepneo-phone.tools.phone_swipe]
+approval_mode = "approve"
+[mcp_servers.stepneo-phone.tools.phone_key]
+approval_mode = "approve"
+[mcp_servers.stepneo-phone.tools.phone_input]
+approval_mode = "approve"
+[mcp_servers.stepneo-phone.tools.phone_click]
+approval_mode = "approve"

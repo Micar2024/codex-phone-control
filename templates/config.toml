@@ -1,0 +1,55 @@
+# Replace placeholders with YOUR endpoint and model. Never put an API key here.
+model_provider = "custom"
+model = "YOUR_MODEL_ID"
+model_catalog_json = "/data/local/tmp/stepneo-codex/config/stepfun-models.json"
+# Uncomment only with an effort value supported by your provider and this CLI:
+# model_reasoning_effort = "medium"
+cli_auth_credentials_store = "file"
+# Interactive use: request approval instead of silently allowing command execution.
+approval_policy = "on-request"
+sandbox_mode = "read-only"
+web_search = "disabled"
+mcp_optional_startup_grace_ms = 5000
+suppress_unstable_features_warning = true
+
+[features]
+unbounded_connection_retries = false
+# StepFun models do not advertise Code Mode support, but Code Mode's tool search
+# is what publishes MCP tools to the model. Keep code_mode_only off so the tools
+# are listed directly instead of being hidden behind a code-mode-only contract.
+code_mode = true
+code_mode_only = false
+code_mode_tool_search = true
+
+[model_providers.custom]
+name = "Your Responses API"
+base_url = "https://api.example.com/v1"
+wire_api = "responses"
+requires_openai_auth = true
+supports_websockets = false
+request_max_retries = 0
+stream_max_retries = 0
+stream_idle_timeout_ms = 120000
+
+[mcp_servers.stepneo-phone]
+command = "/system/bin/sh"
+args = ["/data/local/tmp/stepneo-codex/phone-mcp.sh"]
+required = true
+startup_timeout_sec = 20
+tool_timeout_sec = 30
+enabled_tools = ["phone_status", "phone_capabilities", "phone_find", "phone_wait", "phone_ui", "phone_screenshot", "phone_tap", "phone_swipe", "phone_key", "phone_launch", "phone_open_url", "phone_input", "phone_click"]
+env_vars = ["PATH", "BOOTCLASSPATH", "DEX2OATBOOTCLASSPATH", "ANDROID_ROOT", "ANDROID_DATA", "ANDROID_ART_ROOT", "ANDROID_I18N_ROOT", "ANDROID_TZDATA_ROOT", "ANDROID_ASSETS", "ANDROID_BOOTLOGO", "ANDROID_STORAGE", "ASEC_MOUNTPOINT", "DOWNLOAD_CACHE", "EXTERNAL_STORAGE", "STANDALONE_SYSTEMSERVER_JARS", "SYSTEMSERVERCLASSPATH", "USER", "LOGNAME", "STEPNEO_PHONE_PROFILE", "STEPNEO_PHONE_POLICY"]
+
+# Local phone actions allowed for tasks authorized by the device owner.
+[mcp_servers.stepneo-phone.tools.phone_launch]
+approval_mode = "prompt"
+[mcp_servers.stepneo-phone.tools.phone_tap]
+approval_mode = "prompt"
+[mcp_servers.stepneo-phone.tools.phone_swipe]
+approval_mode = "prompt"
+[mcp_servers.stepneo-phone.tools.phone_key]
+approval_mode = "prompt"
+[mcp_servers.stepneo-phone.tools.phone_input]
+approval_mode = "prompt"
+[mcp_servers.stepneo-phone.tools.phone_click]
+approval_mode = "prompt"

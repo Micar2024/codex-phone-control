@@ -1,0 +1,21 @@
+# Local toolchain, caches and build output
+.tools/
+.gradle/
+.android/
+local.properties
+**/build/
+*.iml
+.idea/
+.DS_Store
+
+# Release archives and local verification artifacts
+dist/
+
+# Never commit credentials
+auth.json
+client.json
+*.key
+*.pem
+*.keystore
+config.toml.local
+secrets/

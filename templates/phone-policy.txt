@@ -1,0 +1,8 @@
+# Add one deny_package or deny_text rule per line. The appended value is a
+# case-insensitive extended regular expression. Full profile ignores this file.
+deny_package com.android.settings
+deny_package com.eg.android.AlipayGphone
+deny_text 支付|付款|转账|购买|下单|提交订单|确认订单|立即支付
+deny_text 确认|确定|同意
+deny_text 删除|卸载|格式化|恢复出厂|清除全部数据|修改密码|退出登录|解除绑定
+deny_text 授权访问|允许访问|安装应用|发送消息|发送评论
